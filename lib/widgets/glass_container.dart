@@ -7,26 +7,26 @@ class GlassContainer extends StatelessWidget {
   final double opacity;
 
   const GlassContainer({
-    Key? key,
+    super.key,
     required this.child,
     this.radius = 20.0,
     this.padding = const EdgeInsets.all(16.0),
     this.opacity = 0.2,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(opacity),
+        color: Colors.white.withValues(alpha: opacity),
         borderRadius: BorderRadius.circular(radius),
         border: Border.all(
-          color: Colors.white.withOpacity(0.5),
+          color: Colors.white.withValues(alpha: 0.5),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             spreadRadius: 1,
           )

@@ -31,8 +31,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = const [
     DashboardScreen(),
     TaskListScreen(),
-    const CalendarScreen(),
-    const _SettingsTab(), // Settings/Logout Screen
+    CalendarScreen(),
+    _SettingsTab(), // Settings/Logout Screen
   ];
 
   @override

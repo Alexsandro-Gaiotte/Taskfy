@@ -99,7 +99,7 @@ class DashboardScreen extends StatelessWidget {
         color: AppTheme.cardColor,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: AppTheme.primaryNeon.withOpacity(0.3),
+          color: AppTheme.primaryNeon.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
@@ -143,7 +143,7 @@ class DashboardScreen extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 80,
                     height: 80,
                     child: CircularProgressIndicator(
@@ -177,7 +177,7 @@ class DashboardScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.cardColor,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

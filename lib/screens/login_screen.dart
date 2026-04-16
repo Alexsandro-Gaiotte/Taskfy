@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  const Text(
                     'Faça login para continuar',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -240,7 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'Não possui uma conta? ',
                         style: TextStyle(color: AppTheme.textBody),
                       ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/user_model.dart';
 import 'supabase_config.dart';
@@ -98,7 +99,7 @@ class SupabaseAuthService {
           .maybeSingle();
       return data;
     } catch (e) {
-      print('Erro ao buscar perfil por email: $e');
+      debugPrint('Erro ao buscar perfil por email: $e');
       return null;
     }
   }
@@ -112,7 +113,7 @@ class SupabaseAuthService {
           .maybeSingle();
       return data;
     } catch (e) {
-      print('Erro ao buscar perfil por ID: $e');
+      debugPrint('Erro ao buscar perfil por ID: $e');
       return null;
     }
   }

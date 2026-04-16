@@ -1,12 +1,15 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SupabaseConfig {
-  // ATENÇÃO: Substitua os valores abaixo pela URL e Anon Key do seu projeto Supabase
-  static const String supabaseUrl = 'https://qzedhpartiznuekcsobz.supabase.co';
-  static const String supabaseAnonKey =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6ZWRocGFydGl6bnVla2Nzb2J6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDE0NjcsImV4cCI6MjA5MTgxNzQ2N30.N4mqh_bNiINX2ANU_NNRSNCNHRoMbdpDkSD802AmBOo';
-
   static Future<void> initialize() async {
+    final supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
+    final supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? '';
+
+    if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+      throw Exception('Failed to load Supabase configurations via dotenv.');
+    }
+
     await Supabase.initialize(
       url: supabaseUrl,
       anonKey: supabaseAnonKey,

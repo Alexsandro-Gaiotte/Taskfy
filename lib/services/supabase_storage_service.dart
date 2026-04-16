@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/task.dart';
 import 'supabase_config.dart';
@@ -6,19 +7,45 @@ class SupabaseStorageService {
   final SupabaseClient _client = SupabaseConfig.client;
 
   Future<List<Task>> getTasks(String userId) async {
+    final List<dynamic> allTasks = [];
+    
+    // 1. Busca as tarefas criadas pelo usuário (Sempre deve funcionar)
     try {
-      // Pega tarefas criadas pelo user ou atribuídas/compartilhadas com ele
-      final response = await _client
-          .from('tasks')
-          .select()
-          .or('createdBy.eq.$userId,assignedTo.cs.["$userId"],sharedWith.cs.["$userId"]');
-
-      final List<dynamic> data = response as List<dynamic>;
-      return data.map((map) => Task.fromMap(map)).toList();
+      final resCreated = await _client.from('tasks').select().eq('createdBy', userId);
+      allTasks.addAll(resCreated as List<dynamic>);
     } catch (e) {
-      print('Erro ao buscar tarefas do Supabase: $e');
-      return [];
+      debugPrint('Erro ao buscar tarefas (createdBy): $e');
     }
+
+    // Para colunas jsonb (assignedTo e sharedWith), o contains no Supabase Flutter
+    // precisa receber a exata string JSON (ex: '["id"]') para não ser confundido
+    // com um array Postgres normal (que usa chaves {}).
+    final String jsonUserId = '["$userId"]';
+
+    // 2. Busca as tarefas atribuídas ao usuário
+    try {
+      final resAssigned = await _client.from('tasks').select().contains('assignedTo', jsonUserId);
+      allTasks.addAll(resAssigned as List<dynamic>);
+    } catch (e) {
+      debugPrint('Erro ao buscar tarefas (assignedTo): $e');
+    }
+
+    // 3. Busca as tarefas compartilhadas com o usuário
+    try {
+      final resShared = await _client.from('tasks').select().contains('sharedWith', jsonUserId);
+      allTasks.addAll(resShared as List<dynamic>);
+    } catch (e) {
+      debugPrint('Erro ao buscar tarefas (sharedWith): $e');
+    }
+
+    // Removendo possíveis tarefas duplicadas (uma tarefa pode ter sido criada
+    // e atribuída à mesma pessoa, ou retornada nos múltiplos fluxos)
+    final Map<String, dynamic> uniqueTasks = {};
+    for (var map in allTasks) {
+      uniqueTasks[map['id']] = map;
+    }
+    
+    return uniqueTasks.values.map((map) => Task.fromMap(map)).toList();
   }
 
   Future<void> saveTasks(List<Task> tasks) async {
@@ -32,7 +59,7 @@ class SupabaseStorageService {
     try {
       await _client.from('tasks').upsert(task.toMap());
     } catch (e) {
-      print('Erro ao adicionar tarefa no Supabase: $e');
+      debugPrint('Erro ao adicionar tarefa no Supabase: $e');
       throw Exception('Falha ao salvar tarefa no Supabase.');
     }
   }
@@ -41,7 +68,7 @@ class SupabaseStorageService {
     try {
       await _client.from('tasks').update(task.toMap()).eq('id', task.id);
     } catch (e) {
-      print('Erro ao atualizar tarefa: $e');
+      debugPrint('Erro ao atualizar tarefa: $e');
     }
   }
 
@@ -49,7 +76,7 @@ class SupabaseStorageService {
     try {
       await _client.from('tasks').delete().eq('id', taskId);
     } catch (e) {
-      print('Erro ao deletar tarefa: $e');
+      debugPrint('Erro ao deletar tarefa: $e');
     }
   }
 }

@@ -47,7 +47,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               child: Consumer<TaskProvider>(
                 builder: (context, provider, child) {
                   return Container(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: AppTheme.cardColor,
                       borderRadius: BorderRadius.circular(24),
@@ -85,8 +85,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       headerStyle: HeaderStyle(
                         titleTextStyle: GoogleFonts.inter(color: AppTheme.textWhite, fontSize: 18, fontWeight: FontWeight.w600),
                         formatButtonVisible: false,
-                        leftChevronIcon: Icon(Icons.chevron_left, color: AppTheme.textWhite),
-                        rightChevronIcon: Icon(Icons.chevron_right, color: AppTheme.textWhite),
+                        leftChevronIcon: const Icon(Icons.chevron_left, color: AppTheme.textWhite),
+                        rightChevronIcon: const Icon(Icons.chevron_right, color: AppTheme.textWhite),
                       ),
                       daysOfWeekStyle: DaysOfWeekStyle(
                         weekdayStyle: GoogleFonts.inter(color: AppTheme.textBody),
@@ -137,7 +137,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: AppTheme.topHeaderGradient,
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
       ),
@@ -159,7 +159,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 onTap: () {
                    Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => CreateTaskScreen()),
+                    MaterialPageRoute(builder: (_) => const CreateTaskScreen()),
                   );
                 },
                 child: Container(
@@ -187,8 +187,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         );
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 12),
-        padding: EdgeInsets.all(20),
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: AppTheme.cardColor,
           borderRadius: BorderRadius.circular(24),
@@ -226,7 +226,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ),
                 ),
              ),
-             SizedBox(width: 16),
+             const SizedBox(width: 16),
              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +244,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             : null,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       task.isDone ? 'Concluída' : 'Pendente',
                       style: GoogleFonts.inter(

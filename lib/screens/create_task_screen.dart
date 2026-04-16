@@ -103,8 +103,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
         );
       },
     ).then((pickedDate) {
-      if (pickedDate == null) return;
+      if (pickedDate == null || !mounted) return;
       
+      // ignore: use_build_context_synchronously
       showTimePicker(
         context: context,
         initialTime: _selectedDate != null 
@@ -661,7 +662,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                                     _memberEmailController.clear();
                                   });
                                 } else {
-                                  if (mounted) {
+                                  if (context.mounted) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Usuário não encontrado.')),
                                     );
@@ -758,7 +759,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     ),
                     Switch(
                       value: _hasAlarm,
-                      activeColor: AppTheme.primaryNeon,
+                      activeThumbColor: AppTheme.primaryNeon,
                       onChanged: (value) {
                         setState(() {
                           _hasAlarm = value;
@@ -919,7 +920,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.primaryNeon.withOpacity(0.4),
+                      color: AppTheme.primaryNeon.withValues(alpha: 0.4),
                       blurRadius: 15,
                       offset: const Offset(0, 5),
                     )

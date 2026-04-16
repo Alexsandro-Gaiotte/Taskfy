@@ -16,8 +16,7 @@ class TaskListScreen extends StatefulWidget {
 }
 
 class _TaskListScreenState extends State<TaskListScreen> {
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-  
+
   // Filter states
   String _activeDateFilter = 'Todas'; 
   String _activeStatusFilter = 'Todas'; 
@@ -39,11 +38,6 @@ class _TaskListScreenState extends State<TaskListScreen> {
         duration: const Duration(seconds: 3),
       )
     );
-  }
-
-  void _removeTask(String id, int index, Task removedTask) {
-    Provider.of<TaskProvider>(context, listen: false).deleteTask(id);
-    _showSuccessMessage('Tarefa excluída com sucesso!');
   }
 
   void _navigateToCreate() async {
@@ -160,9 +154,9 @@ class _TaskListScreenState extends State<TaskListScreen> {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: AppTheme.topHeaderGradient,
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(40)),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
       ),
       padding: const EdgeInsets.only(top: 60, left: 24, right: 24, bottom: 40),
       child: Column(
@@ -178,7 +172,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppTheme.textWhite.withOpacity(0.2),
+                        color: AppTheme.textWhite.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.notifications_none, color: AppTheme.textWhite, size: 24),
@@ -203,13 +197,13 @@ class _TaskListScreenState extends State<TaskListScreen> {
             children: [
               Text('Visão Geral', style: GoogleFonts.inter(color: AppTheme.textWhite, fontSize: 24, fontWeight: FontWeight.w600)),
               const SizedBox(width: 8),
-              Icon(Icons.link, color: AppTheme.textWhite.withOpacity(0.7), size: 18),
+              Icon(Icons.link, color: AppTheme.textWhite.withValues(alpha: 0.7), size: 18),
             ],
           ),
           const SizedBox(height: 8),
           Text(
             'TAREFAS ATIVAS',
-            style: GoogleFonts.inter(color: AppTheme.textWhite.withOpacity(0.8), fontSize: 12, letterSpacing: 1.5, fontWeight: FontWeight.w500),
+            style: GoogleFonts.inter(color: AppTheme.textWhite.withValues(alpha: 0.8), fontSize: 12, letterSpacing: 1.5, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 8),
           Consumer<TaskProvider>(
@@ -247,7 +241,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   },
                   child: Container(
                     height: 56,
-                    decoration: BoxDecoration(color: AppTheme.textWhite.withOpacity(0.2), borderRadius: BorderRadius.circular(28)),
+                    decoration: BoxDecoration(color: AppTheme.textWhite.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(28)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -342,7 +336,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            color: isActive ? AppTheme.primaryNeon.withOpacity(0.2) : AppTheme.cardColor,
+            color: isActive ? AppTheme.primaryNeon.withValues(alpha: 0.2) : AppTheme.cardColor,
             border: Border.all(color: isActive ? AppTheme.primaryNeon : Colors.transparent),
             borderRadius: BorderRadius.circular(20),
           ),
@@ -363,7 +357,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
           gradient: isActive ? AppTheme.buttonGradient : null,
           color: isActive ? null : AppTheme.cardColor,
           borderRadius: BorderRadius.circular(20),
-          border: isActive ? null : Border.all(color: AppTheme.textBody.withOpacity(0.3)),
+          border: isActive ? null : Border.all(color: AppTheme.textBody.withValues(alpha: 0.3)),
         ),
         alignment: Alignment.center,
         child: Text(
@@ -388,7 +382,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
           color: AppTheme.cardColor,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: task.priority == 'Alta' ? AppTheme.primaryNeon.withOpacity(0.5) : task.priority == 'Média' ? Colors.orange.withOpacity(0.5) : Colors.transparent,
+            color: task.priority == 'Alta' ? AppTheme.primaryNeon.withValues(alpha: 0.5) : task.priority == 'Média' ? Colors.orange.withValues(alpha: 0.5) : Colors.transparent,
           ),
         ),
         child: Row(
@@ -403,7 +397,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
               child: Container(
                 width: 48,
                 height: 48,
-                decoration: BoxDecoration(shape: BoxShape.circle, color: task.isDone ? AppTheme.activeGreen.withOpacity(0.2) : AppTheme.backgroundDark),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: task.isDone ? AppTheme.activeGreen.withValues(alpha: 0.2) : AppTheme.backgroundDark),
                 child: Icon(task.isDone ? Icons.check : Icons.circle_outlined, color: task.isDone ? AppTheme.activeGreen : AppTheme.textBody, size: 28),
               ),
             ),

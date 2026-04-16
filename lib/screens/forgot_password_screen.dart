@@ -86,7 +86,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
+                const Text(
                   'Digite seu e-mail abaixo e enviaremos um link para você redefinir sua senha.',
                   textAlign: TextAlign.center,
                   style: TextStyle(

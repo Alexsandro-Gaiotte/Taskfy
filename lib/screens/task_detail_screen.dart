@@ -103,7 +103,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     return Scaffold(
       backgroundColor: AppTheme.backgroundDark,
       appBar: AppBar(
-        title: Text('Detalhes da Tarefa'),
+        title: const Text('Detalhes da Tarefa'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new,
               color: AppTheme.textWhite, size: 20),
@@ -134,13 +134,13 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               decoration: BoxDecoration(
                 color: _currentTask.isDone
-                    ? AppTheme.activeGreen.withOpacity(0.1)
-                    : AppTheme.primaryNeon.withOpacity(0.1),
+                    ? AppTheme.activeGreen.withValues(alpha: 0.1)
+                    : AppTheme.primaryNeon.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: _currentTask.isDone
-                      ? AppTheme.activeGreen.withOpacity(0.5)
-                      : AppTheme.primaryNeon.withOpacity(0.5),
+                      ? AppTheme.activeGreen.withValues(alpha: 0.5)
+                      : AppTheme.primaryNeon.withValues(alpha: 0.5),
                 ),
               ),
               child: Row(
@@ -346,7 +346,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                           color: AppTheme.backgroundDark,
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(Icons.repeat, color: AppTheme.textWhite, size: 20),
+                        child: const Icon(Icons.repeat, color: AppTheme.textWhite, size: 20),
                       ),
                       const SizedBox(width: 16),
                       Column(
@@ -441,7 +441,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                   fontSize: 12,
-                  color: AppTheme.textBody.withOpacity(0.6),
+                  color: AppTheme.textBody.withValues(alpha: 0.6),
                 ),
               ),
             ),

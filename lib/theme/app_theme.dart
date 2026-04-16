@@ -15,12 +15,12 @@ class AppTheme {
     useMaterial3: true,
     fontFamily: 'Inter',
     scaffoldBackgroundColor: backgroundDark,
-    colorScheme: ColorScheme.dark(
+    colorScheme: const ColorScheme.dark(
       primary: primaryNeon,
       secondary: secondaryNeon,
       surface: cardColor,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0,
       iconTheme: IconThemeData(color: textWhite),
